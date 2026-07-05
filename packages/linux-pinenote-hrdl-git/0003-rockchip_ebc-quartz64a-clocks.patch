@@ -1,0 +1,18 @@
+--- a/arch/arm64/boot/dts/rockchip/rk3566-quartz64-a.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-quartz64-a.dts
+@@ -1050,4 +1050,15 @@
+ &rga {
+ 	status = "okay";
+ };
++
++&cru {
++	assigned-clocks = <&pmucru CLK_RTC_32K>, <&cru PLL_GPLL>,
++			  <&pmucru PLL_PPLL>, <&cru ACLK_RGA_PRE>,
++			  <&cru HCLK_RGA_PRE>, <&cru HCLK_EBC>,
++			  <&cru CPLL_250M>, <&cru CPLL_333M>;
++	assigned-clock-rates = <32768>, <1200000000>,
++			       <200000000>, <300000000>,
++			       <300000000>, <300000000>,
++			       <250000000>, <33333334>;
++	assigned-clock-parents = <&pmucru CLK_RTC32K_FRAC>;
++};
