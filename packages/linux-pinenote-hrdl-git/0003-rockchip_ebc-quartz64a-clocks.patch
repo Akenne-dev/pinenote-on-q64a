@@ -1,3 +1,5 @@
+rk3566-quartz64-a: align EBC-related clocks and TPS65185 I2C settings with PineNote
+
 --- a/arch/arm64/boot/dts/rockchip/rk3566-quartz64-a.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3566-quartz64-a.dts
 @@ -581,6 +581,7 @@
@@ -34,6 +36,6 @@
 +			       <1200000000>, <200000000>,
 +			       <300000000>, <250000000>,
 +			       <300000000>, <300000000>,
-+			       <300000000>, <33333334>;
++			       <300000000>, <333333333>;
 +	assigned-clock-parents = <&pmucru CLK_RTC32K_FRAC>;
 +};

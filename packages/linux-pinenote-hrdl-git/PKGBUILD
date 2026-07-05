@@ -31,12 +31,12 @@ source=(
 # recorded stale sums for it (the file was updated without `updpkgsums`).
 sha256sums=('SKIP'
             '4b812e4594a6eeb6cf2ce7f51d5704053c7b60e6832b12231df086c21449b86a'
-            'SKIP'
+            'd3a753806ba15938fc48f3b50b10ce15bf7e1d34d40cee0f3604da2ba30d5ee3'
             '527955361f370a4e2266c7412a2fabe2f189382b829cb893dd9cd2d6c5f2b3b0'
             '70c78d88791f018ee55876270d61c0c99f7c0c1c0b871890380c95afbc90dc86')
 b2sums=('SKIP'
         '1a90fc6066b97d14531c0064d0a4d24798aac83768d2f7e49484eb3ed3730167eef85ba3bb5cb35fbade8eeafc0b1eed2e546735c2c6b0679a00e0e31cd027aa'
-        'SKIP'
+        '1558b80f74d37e540b11912c96b4374aa525791c4474597b14275762b4d234b6544668e34ea0f32242d263a20d78425da38bfbc24c4f7b81d3be406a4a2c7f7f'
         'e6d7ec9d20b97956693ac082e67146227ccda0ca36407b08379417dd144a740b3e0c6f206fe97593ee64feb72dc18c130a9a3c7dc3749f7564b69a766ae09e1e'
         '397dbf8aa17aa66b66684f0560d1b619559a53bc52af31a4356bdac0bd89fa2d759b9779f3a1513e05caa586edb83dd0c70fab588a23170cb2245d64dc6ccee8')
 provides=("linux=${pkgver}" KSMBD-MODULE WIREGUARD-MODULE)
@@ -50,8 +50,7 @@ prepare() {
   # Fix hrdl's 3WIN NEON build break (undeclared direct_mode + missing paren in the
   # fast path), then turn 3WIN on. Boot with rockchip_ebc.direct_mode=0 to actually use it.
   patch -Np1 -i "$srcdir/0001-rockchip_ebc-fix-3win-build.patch"
-  # Quartz64-A bring-up: temp_override bypasses the flaky tps65185 i2c read,
-  # killing the probe-time -110 -> refresh-thread hang.
+  # Quartz64-A bring-up: aligns Quartz64A EBC clocks, I2C, and PMIC settings with PineNote
   patch -Np1 -i "$srcdir/0003-rockchip_ebc-quartz64a-clocks.patch"
   yes "" | make ARCH=arm64 pinenote_defconfig
   ./scripts/config --enable CONFIG_DRM_ROCKCHIP_EBC_3WIN_MODE
